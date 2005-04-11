@@ -3,7 +3,7 @@
 " Filenames:	*.mml
 " Maintainer:	Michal Gorny <michal-gorny@wp.pl>
 " URL:		http://mig.webpark.pl/vim/mathml.vim
-" Last_change:	2005 Mar 07
+" Last_change:	2005 Apr 11
 
 " Quit when a syntax file was already loaded
 if !exists("main_syntax")
@@ -13,13 +13,17 @@ if !exists("main_syntax")
   let main_syntax = 'mathml'
 endif
 
-" Load XML syntax file
-runtime! syntax/xml.vim
+if main_syntax == 'mathml'
+  runtime! syntax/xml.vim
+  syn cluster xmlTagHook add=mathmlElement
+  syn cluster xmlAttribHook add=mathmlAttr
+  syn keyword xmlDeclAttr version encoding standalone containedin=xmlProcessing
+else
+  syn cluster xhtmlTagHook add=mathmlElement
+  syn cluster xhtmlAttribHook add=mathmlAttr
+endif
 
 syn case match
-
-syn cluster xmlTagHook add=mathmlElement
-syn cluster xmlAttribHook add=mathmlAttr
 
 " MathML elements
 syn keyword mathmlElement contained abs and annotation apply approx arccos
@@ -92,6 +96,7 @@ syn keyword mathmlAttr contained color fontfamily fontsize fontstyle fontweight
 
 " Highlighting
 hi link     xmlAttrib		Function
+hi def link xmlDeclAttr 	Type
 hi link     xmlEntity		Special
 hi link     xmlEntityPunct	Special
 hi def link mathmlElement	Statement
