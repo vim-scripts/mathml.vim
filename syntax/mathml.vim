@@ -3,7 +3,7 @@
 " Filenames:	*.mml
 " Maintainer:	Michal Gorny <michal-gorny@wp.pl>
 " URL:		http://mig.webpark.pl/vim/mathml.vim
-" Last_change:	2005 Apr 11
+" Last_change:	2005 Jun 08
 
 " Quit when a syntax file was already loaded
 if !exists("main_syntax")
@@ -17,7 +17,7 @@ if main_syntax == 'mathml'
   runtime! syntax/xml.vim
   syn cluster xmlTagHook add=mathmlElement
   syn cluster xmlAttribHook add=mathmlAttr
-  syn keyword xmlDeclAttr version encoding standalone containedin=xmlProcessing
+  syn keyword xmlDeclAttr version encoding standalone containedin=xmlProcessing contained
 else
   syn cluster xhtmlTagHook add=mathmlElement
   syn cluster xhtmlAttribHook add=mathmlAttr
