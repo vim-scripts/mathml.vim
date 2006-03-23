@@ -2,8 +2,7 @@
 " Language:	MathML
 " Filenames:	*.mml
 " Maintainer:	Michal Gorny <michal-gorny@wp.pl>
-" URL:		http://mig.webpark.pl/vim/mathml.vim
-" Last_change:	2005 Jun 08
+" Last_change:	2006-03-23
 
 " Quit when a syntax file was already loaded
 if !exists("main_syntax")
@@ -17,7 +16,9 @@ if main_syntax == 'mathml'
   runtime! syntax/xml.vim
   syn cluster xmlTagHook add=mathmlElement
   syn cluster xmlAttribHook add=mathmlAttr
+  syn match xmlDecl /\<\(<?\)\@<=xml\(-stylesheet\)\?\>/ containedin=xmlProcessing contained
   syn keyword xmlDeclAttr version encoding standalone containedin=xmlProcessing contained
+  syn keyword xmlDeclAttr alternate charset media href title type containedin=xmlProcessing contained
 else
   syn cluster xhtmlTagHook add=mathmlElement
   syn cluster xhtmlAttribHook add=mathmlAttr
@@ -96,6 +97,7 @@ syn keyword mathmlAttr contained color fontfamily fontsize fontstyle fontweight
 
 " Highlighting
 hi link     xmlAttrib		Function
+hi def link xmlDecl		Statement
 hi def link xmlDeclAttr 	Type
 hi link     xmlEntity		Special
 hi link     xmlEntityPunct	Special
@@ -108,4 +110,4 @@ if main_syntax == 'mathml'
   unlet main_syntax
 endif
 
-" vim:ts=8
+" vim: ts=8
